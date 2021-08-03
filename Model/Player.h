@@ -3,7 +3,12 @@
 
 #include <iostream>
 class Player {
+public:
 
+private:
+    std::string name;
+    unsigned int score;
+    bool isAI;
 };
 
 
