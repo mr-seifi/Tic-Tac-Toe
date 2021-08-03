@@ -1,5 +1,6 @@
 #include "Board.h"
 #include <stdexcept>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -30,6 +31,7 @@ string Board::toString() const
 
 ostream &operator<<(ostream &output, const Board &b)
 {
+    system("clear");
     output << b.toString() << endl;
     return output;
 }
