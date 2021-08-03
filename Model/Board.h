@@ -4,10 +4,11 @@
 #include <iostream>
 #include <vector>
 class Board {
+    friend std::ostream &operator<<(std::ostream&, const Board&);
 public:
     Board();
     void turn(unsigned int, char);
-    void show() const;
+    std::string toString() const;
 
 private:
     std::vector<char> board;
