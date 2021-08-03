@@ -17,7 +17,7 @@ Player::Player(string name, bool isAI)
     id = ++lastId;
     setName(name);
     score = 0;
-    setIsAI(isAI)
+    setIsAI(isAI);
 }
 
 unsigned int Player::getId() const
