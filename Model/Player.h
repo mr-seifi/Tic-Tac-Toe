@@ -4,6 +4,14 @@
 #include <iostream>
 class Player {
 public:
+    Player();
+    explicit Player(std::string, unsigned int = 0, bool = false);
+    void setName(std::string);
+    std::string getName() const;
+    void setScore(unsigned int);
+    unsigned int getScore() const;
+    void setIsAI(bool);
+    bool getIsAI() const;
 
 private:
     std::string name;
