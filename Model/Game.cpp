@@ -34,8 +34,26 @@ void Game::playerTurn()
 {
     Player player = whoTurn();
     if(isEnd())
-        throw invalid_argument("The game is over."); // ++set
+        throw invalid_argument("The game is over."); // operator<< for save results ... File << Game
 
+    if(!player.getIsAI())
+    {
+        int t;
+        cout << player.getName() << " turn's: ";
+        cin >> t;
+        try
+        {
+            board.turn(t, player.getNotation());
+        }
+        catch (invalid_argument &err)
+        {
+            cout << "You can't do this because position " << t << " isn't empty."
+            << " Try again!" << endl;
+            return;
+        }
+    }
+
+    ++set;
 }
 
 int Game::getCurrentResult() const
@@ -55,11 +73,10 @@ int Game::getCurrentResult() const
     || result[2] == (result[5] == result[8])) // X--/-X-/--X
         return 5;
 
-    for(int i = 0; i < 11; ++i)
-        if(result[i] == '-')
-            return -1; // Not end
+    if(set == 9)
+        return 11; // End -> Equal
 
-    return 11; // End -> Equal
+    return -1; // Not end
 }
 
 bool Game::isEnd() const
