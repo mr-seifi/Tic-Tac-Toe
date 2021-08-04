@@ -3,6 +3,7 @@
 
 #include <iostream>
 class Player {
+    friend std::istream &operator>>(std::istream&, Player&);
 public:
     Player();
     explicit Player(std::string, bool = false);

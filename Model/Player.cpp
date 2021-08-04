@@ -73,3 +73,26 @@ char Player::getNotation() const
 {
     return notation;
 }
+
+istream &operator>>(istream &input, Player &p)
+{
+    cout << "Enter player" << p.getId() << " name: ";
+    string name;
+    input >> name;
+    p.setName(name);
+
+    string ai;
+    cout << "Are you robot? ";
+    input >> ai;
+    if(ai == "yes")
+        p.setIsAI(true);
+    else
+        p.setIsAI(false);
+
+    char notation;
+    cout << "Enter player" << p.getId() << " notation: ";
+    input >> notation;
+    p.setNotation(notation);
+
+    return input;
+}
