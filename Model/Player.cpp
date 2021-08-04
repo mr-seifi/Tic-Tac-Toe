@@ -20,6 +20,15 @@ Player::Player(string name, bool isAI)
     setIsAI(isAI);
 }
 
+Player::Player(string name, char notation, bool isAI)
+{
+    id = ++lastId;
+    setName(name);
+    setNotation(notation);
+    score = 0;
+    setIsAI(isAI);
+}
+
 unsigned int Player::getId() const
 {
     return id;
@@ -53,4 +62,14 @@ void Player::setIsAI(bool ai)
 bool Player::getIsAI() const
 {
     return isAI;
+}
+
+void Player::setNotation(char n)
+{
+    notation = n;
+}
+
+char Player::getNotation() const
+{
+    return notation;
 }
