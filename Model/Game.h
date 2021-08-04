@@ -10,7 +10,8 @@ public:
     Game();
     Game(const Player&, const Player&, const Board&);
     const Player &whoTurn() const;
-    bool isEnd() const;
+    int isEnd() const;
+    bool isEqual() const;
     const Player &getWinner() const;
     void playerTurn();
 
