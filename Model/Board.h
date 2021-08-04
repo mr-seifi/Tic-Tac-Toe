@@ -9,6 +9,7 @@ public:
     Board();
     void turn(unsigned int, char);
     std::string toString() const;
+    std::string toOutput() const;
 
 private:
     std::vector<char> board;
