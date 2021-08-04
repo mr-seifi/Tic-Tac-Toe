@@ -17,7 +17,7 @@ Game::Game(const Player &p1, const Player &p2, const Board &b)
         if(board.toString()[i] != '-' && board.toString()[i] != '/')
             throw invalid_argument("Your board should be empty.");
 
-    set = 1;
+    set = 1; // Change this name
     players.first = p1;
     players.second = p2;
     board = b;
@@ -33,12 +33,12 @@ const Player &Game::whoTurn() const
 void Game::playerTurn()
 {
     Player player = whoTurn();
-    if(isEnd() != -1)
-        throw invalid_argument("The game is over.");
+    if(isEnd())
+        throw invalid_argument("The game is over."); // ++set
 
 }
 
-int Game::isEnd() const
+int Game::getCurrentResult() const
 {
     string result = board.toString();
 
@@ -62,16 +62,23 @@ int Game::isEnd() const
     return 11; // End -> Equal
 }
 
+bool Game::isEnd() const
+{
+    if(getCurrentResult() == -1)
+        return false;
+    return true;
+}
+
 bool Game::isEqual() const
 {
-    if(isEnd() == 11)
+    if(getCurrentResult() == 11)
         return true;
     return false;
 }
 
 const Player &Game::getWinner() const
 {
-    if(isEnd() == -1)
+    if(!isEnd())
         throw invalid_argument("Play until the game is over.");
 
     if(isEqual())

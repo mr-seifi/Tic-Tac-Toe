@@ -10,11 +10,12 @@ public:
     Game();
     Game(const Player&, const Player&, const Board&);
     const Player &whoTurn() const;
-    int isEnd() const;
+    int getCurrentResult() const;
+    bool isEnd() const;
     bool isEqual() const;
     const Player &getWinner() const;
-    void playerTurn();
-
+    void playerTurn(); // ++PlayerScore
+    // getResult ifEnd()
 private:
     unsigned int set;
     std::pair<Player, Player> players;
