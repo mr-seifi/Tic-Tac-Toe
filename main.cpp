@@ -26,7 +26,15 @@ int main() {
             cout << err.what() << endl;
         }
     }
-    cout << game.getWinner().getName() << " is win!" << endl;
+
+    try
+    {
+        cout << game.getWinner().getName() << " is win!" << endl;
+    }
+    catch (exception &err)
+    {
+        cout << err.what();
+    }
 
     return 0;
 }
