@@ -16,6 +16,9 @@ void Board::turn(unsigned int pos, char notation)
     if(pos > 9 || pos < 1)
         throw out_of_range("Turn in range of 3x3 Tic-Tac-Toe -> range: (1-9).");
 
+    if(board[pos] != ' ')
+        throw invalid_argument("You can't do this because your pos isn't empty.");
+
     board[pos] = notation;
 }
 
