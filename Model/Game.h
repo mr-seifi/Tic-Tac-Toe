@@ -15,6 +15,7 @@ public:
     bool isEqual() const;
     const Player &getWinner() const;
     void playerTurn(); // ++PlayerScore
+    const Board &getBoard();
     // getResult ifEnd()
 private:
     unsigned int set;
