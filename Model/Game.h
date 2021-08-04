@@ -8,11 +8,14 @@
 class Game {
 public:
     Game();
-    Game(Player, Player, Board);
-    const Player &whoTurn();
-    void turn();
+    Game(const Player&, const Player&, const Board&);
+    const Player &whoTurn() const;
+    bool isEnd() const;
+    const Player &getWinner() const;
+    void playerTurn();
 
 private:
+    unsigned int set;
     std::pair<Player, Player> players;
     Board board;
 };
