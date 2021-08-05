@@ -7,6 +7,7 @@ using namespace std;
 
 Game::Game()
 {
+    srand(time(0));
     set = 0;
 }
 
@@ -18,6 +19,7 @@ Game::Game(const Player &p1, const Player &p2, const Board &b)
     if(p1.getNotation() == '-' || p2.getNotation() == '-')
         throw invalid_argument("Notations... you can't select hyphen as notation.");
 
+    srand(time(0));
     for(int i = 0; i < 11; ++i)
         if(board.toString()[i] != '-' && board.toString()[i] != '/')
             throw invalid_argument("Your board should be empty.");
@@ -60,7 +62,6 @@ bool Game::playerTurn()
     }
     else
     {
-        srand(time(0));
         int t = rand() % 9 + 1;
         try
         {
