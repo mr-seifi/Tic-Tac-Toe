@@ -13,6 +13,9 @@ Game::Game(const Player &p1, const Player &p2, const Board &b)
     if(p1.getNotation() == p2.getNotation())
         throw invalid_argument("Notations... they can't be equal.");
 
+    if(p1.getNotation() == '-' || p2.getNotation() == '-')
+        throw invalid_argument("Notations... you can't select hyphen as notation.");
+
     for(int i = 0; i < 11; ++i)
         if(board.toString()[i] != '-' && board.toString()[i] != '/')
             throw invalid_argument("Your board should be empty.");
@@ -110,4 +113,57 @@ const Player &Game::getWinner() const
 const Board &Game::getBoard()
 {
     return board;
+}
+
+string Game::getResult(unsigned int playerNo) const
+{
+    if(playerNo != 1 && playerNo != 2)
+        throw out_of_range("Whose result do you want?");
+
+    if(!isEnd())
+        throw invalid_argument("Play until the game is over.");
+
+    if(isEqual())
+        throw invalid_argument("We don't want equal results.");
+
+    string boardRes = board.toString();
+    string res = "";
+
+    Player ourPlayer;
+    Player theirPlayer;
+    if(playerNo == 1)
+    {
+        ourPlayer = players.first;
+        theirPlayer = players.second;
+    }
+    else
+    {
+        ourPlayer = players.second;
+        theirPlayer = players.first;
+    }
+
+    for(int i = 0; i < 11; ++i)
+    {
+        if(i == 3 || i == 7)
+            continue;
+
+        if(boardRes[i] == '-')
+            res += "0";
+        else if(boardRes[i] == ourPlayer.getNotation())
+            res += "1";
+        else if(boardRes[i] == theirPlayer.getNotation())
+            res += "-1";
+
+        res += " ";
+    }
+
+    Player winnerPlayer = getWinner();
+    if(winnerPlayer.getId() == ourPlayer.getId())
+    {
+        res += "1";
+        return res;
+    }
+
+    res += "0";
+    return res;
 }

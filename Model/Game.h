@@ -16,7 +16,8 @@ public:
     const Player &getWinner() const;
     void playerTurn(); // ++PlayerScore
     const Board &getBoard();
-    // getResult ifEnd()
+    std::string getResult(unsigned int) const;
+
 private:
     unsigned int set;
     std::pair<Player, Player> players;
