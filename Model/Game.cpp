@@ -1,5 +1,7 @@
 #include "Game.h"
 #include <stdexcept>
+#include <stdlib.h>
+#include<time.h>
 
 using namespace std;
 
@@ -53,6 +55,20 @@ void Game::playerTurn()
         {
             cout << "You can't do this because position " << t << " isn't empty."
             << " Try again!" << endl;
+            return;
+        }
+    }
+    else
+    {
+        srand(time(0));
+        int t = rand() % 9 + 1;
+        try
+        {
+            board.turn(t, player.getNotation());
+            cout << player.getName() << " turn's: " << t;
+        }
+        catch (invalid_argument &err)
+        {
             return;
         }
     }
