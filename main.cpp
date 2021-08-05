@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Model/Game.h"
+#include "Data/TrainingData.h"
 
 using namespace std;
 
@@ -30,6 +31,10 @@ int main() {
     try
     {
         cout << game.getWinner().getName() << " is win!" << endl;
+        TrainingData &dataStream = TrainingData::getInstance();
+        dataStream.open();
+        dataStream << game.getResult(1);
+        dataStream.close();
     }
     catch (exception &err)
     {
