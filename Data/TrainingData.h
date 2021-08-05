@@ -14,7 +14,7 @@ private:
     TrainingData() {}
     TrainingData(const TrainingData&) = delete;
     void operator=(const TrainingData&) = delete;
-    std::fstream fileStream;
+    std::ofstream outputStream;
 };
 
 
