@@ -14,7 +14,7 @@ public:
     bool isEnd() const;
     bool isEqual() const;
     const Player &getWinner() const;
-    void playerTurn(); // ++PlayerScore
+    bool playerTurn(); // ++PlayerScore
     const Board &getBoard();
     std::string getResult(unsigned int) const;
 

@@ -35,7 +35,7 @@ const Player &Game::whoTurn() const
     return players.second;
 }
 
-void Game::playerTurn()
+bool Game::playerTurn()
 {
     Player player = whoTurn();
 
@@ -55,7 +55,7 @@ void Game::playerTurn()
         {
             cout << "You can't do this because position " << t << " isn't empty."
             << " Try again!" << endl;
-            return;
+            return false;
         }
     }
     else
@@ -68,12 +68,13 @@ void Game::playerTurn()
         }
         catch (invalid_argument &err)
         {
-            return;
+            return false;
         }
         cout << player.getName() << " turn's: " << t << endl;
     }
 
     ++set;
+    return true;
 }
 
 int Game::getCurrentResult() const
