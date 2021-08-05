@@ -65,12 +65,12 @@ void Game::playerTurn()
         try
         {
             board.turn(t, player.getNotation());
-            cout << player.getName() << " turn's: " << t << endl;
         }
         catch (invalid_argument &err)
         {
             return;
         }
+        cout << player.getName() << " turn's: " << t << endl;
     }
 
     ++set;
@@ -86,7 +86,7 @@ int Game::getCurrentResult() const
             return i;
         if(result[i + j] == result[i + j + 1] && result[i + j + 1] == result[i + j + 2] && result[i + j] != '-') // XXX/---/---
             return i + j;
-        if(i == 0) j += 3; else j += 2;
+        j += 3;
     }
 
     if((result[0] == result[5] && result[5] == result[10] && result[5] != '-')
