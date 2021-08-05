@@ -29,9 +29,11 @@ TrainingData &TrainingData::operator<<(const string &s)
 {
     if(fileStream.is_open())
     {
-        size_t strSize = s.size();
+        string res = s;
+        size_t strSize = res.size();
         fileStream.write(reinterpret_cast<char*>(&strSize), sizeof(strSize));
-        fileStream.write(reinterpret_cast<char*>(s[0]), strSize);
+        fileStream.write(reinterpret_cast<char*>(&(res[0])), strSize);
+        return (*this);
     }
 
     throw runtime_error("Your file stream isn't open.");
