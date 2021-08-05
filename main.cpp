@@ -20,7 +20,7 @@ int main() {
         try
         {
             game.playerTurn();
-            cout << game.getBoard();
+            cout << game.getBoard() << endl;
         }
         catch (exception &err)
         {
