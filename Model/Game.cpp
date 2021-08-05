@@ -65,7 +65,7 @@ void Game::playerTurn()
         try
         {
             board.turn(t, player.getNotation());
-            cout << player.getName() << " turn's: " << t;
+            cout << player.getName() << " turn's: " << t << endl;
         }
         catch (invalid_argument &err)
         {
