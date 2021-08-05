@@ -19,8 +19,8 @@ int main() {
     {
         try
         {
-            game.playerTurn();
-            cout << game.getBoard() << endl;
+            if(game.playerTurn())
+                cout << game.getBoard() << endl;
         }
         catch (exception &err)
         {
