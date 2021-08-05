@@ -1,7 +1,9 @@
 #include "Game.h"
+#include "../Data/TrainingData.h"
 #include <stdexcept>
 #include <stdlib.h>
-#include<time.h>
+#include <time.h>
+#include <unistd.h>
 
 using namespace std;
 
@@ -184,4 +186,87 @@ string Game::getResult(unsigned int playerNo) const
 
     res += "0";
     return res;
+}
+
+void Game::play()
+{
+    Player p1;
+    cin >> p1;
+    Player p2;
+    cin >> p2;
+
+    Board b;
+
+    Game game(p1, p2, b);
+    while(!game.isEnd())
+    {
+        try
+        {
+            if(game.playerTurn())
+                cout << game.getBoard() << endl;
+        }
+        catch (exception &err)
+        {
+            cout << err.what() << endl;
+        }
+    }
+
+    try
+    {
+        cout << game.getWinner().getName() << " is win!" << endl;
+        TrainingData &dataStream = TrainingData::getInstance();
+        dataStream.open();
+        dataStream << game.getResult(1);
+        dataStream.close();
+    }
+    catch (exception &err)
+    {
+        cout << err.what();
+    }
+
+}
+
+void Game::autoPlay(unsigned int num)
+{
+    for(int i = 0; i < num; ++i)
+    {
+        Player p1;
+        p1.setName("Ai1");
+        p1.setNotation('X');
+        p1.setIsAI(true);
+        Player p2;
+        p2.setName("Ai2");
+        p2.setNotation('O');
+        p2.setIsAI(true);
+
+        Board b;
+
+        Game game(p1, p2, b);
+        while(!game.isEnd())
+        {
+            try
+            {
+                if(game.playerTurn())
+                    cout << game.getBoard() << endl;
+            }
+            catch (exception &err)
+            {
+                cout << err.what() << endl;
+            }
+        }
+
+        try
+        {
+            cout << game.getWinner().getName() << " is win!" << endl;
+            TrainingData &dataStream = TrainingData::getInstance();
+            dataStream.open();
+            dataStream << game.getResult(1);
+            dataStream.close();
+        }
+        catch (exception &err)
+        {
+            cout << err.what();
+        }
+        sleep(1);
+    }
 }

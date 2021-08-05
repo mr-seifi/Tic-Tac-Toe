@@ -17,6 +17,8 @@ public:
     bool playerTurn(); // ++PlayerScore
     const Board &getBoard();
     std::string getResult(unsigned int) const;
+    static void play();
+    static void autoPlay(unsigned int);
 
 private:
     unsigned int set;
