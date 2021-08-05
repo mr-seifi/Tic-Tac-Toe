@@ -29,12 +29,18 @@ TrainingData &TrainingData::operator<<(const string &s)
 {
     if(outputStream.is_open())
     {
-        string res = "";
-        for(int i = 0; i < 19; ++i)
-            if(i % 2 == 0)
-                res += s[i];
+        string gameRes = s;
+        string delimiter = " ";
+        size_t pos = 0;
 
-        outputStream << res << endl;
+        int res;
+        while ((pos = gameRes.find(delimiter)) != std::string::npos) {
+            res = stoi(gameRes.substr(0, pos));
+            outputStream << res << ' ';
+            gameRes.erase(0, pos + delimiter.length());
+        }
+
+        outputStream << s[s.length() - 1] << endl;
         return (*this);
     }
 
