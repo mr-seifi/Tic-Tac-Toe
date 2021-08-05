@@ -12,7 +12,7 @@ void TrainingData::open()
 {
     try
     {
-        fileStream.open("data.mat", ios::binary | ios::app);
+        outputStream.open("data.mat", ios_base::app);
     }
     catch (exception &err)
     {
@@ -22,17 +22,19 @@ void TrainingData::open()
 
 void TrainingData::close()
 {
-    fileStream.close();
+    outputStream.close();
 }
 
 TrainingData &TrainingData::operator<<(const string &s)
 {
-    if(fileStream.is_open())
+    if(outputStream.is_open())
     {
-        string res = s;
-        size_t strSize = res.size();
-        fileStream.write(reinterpret_cast<char*>(&strSize), sizeof(strSize));
-        fileStream.write(reinterpret_cast<char*>(&(res[0])), strSize);
+        string res = "";
+        for(int i = 0; i < 19; ++i)
+            if(i % 2 == 0)
+                res += s[i];
+
+        outputStream << res << endl;
         return (*this);
     }
 
