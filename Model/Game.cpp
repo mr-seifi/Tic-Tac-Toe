@@ -26,10 +26,10 @@ Game::Game(const Player &p1, const Player &p2, const Board &b)
         if(board.toString()[i] != '-' && board.toString()[i] != '/')
             throw invalid_argument("Your board should be empty.");
 
-    set = 0; // Change this name
-    players.first = p1;
-    players.second = p2;
-    board = b;
+        set = 0; // Change this name
+        players.first = p1;
+        players.second = p2;
+        board = b;
 }
 
 const Player &Game::whoTurn() const
@@ -46,38 +46,38 @@ bool Game::playerTurn()
     if(isEnd())
         throw invalid_argument("The game is over."); // operator<< for save results ... File << Game
 
-    if(!player.getIsAI())
-    {
-        int t;
-        cout << player.getName() << " turn's: ";
-        cin >> t;
-        try
+        if(!player.getIsAI())
         {
-            board.turn(t, player.getNotation());
+            int t;
+            cout << player.getName() << " turn's: ";
+            cin >> t;
+            try
+            {
+                board.turn(t, player.getNotation());
+            }
+            catch (invalid_argument &err)
+            {
+                cout << "You can't do this because position " << t << " isn't empty."
+                << " Try again!" << endl;
+                return false;
+            }
         }
-        catch (invalid_argument &err)
+        else
         {
-            cout << "You can't do this because position " << t << " isn't empty."
-            << " Try again!" << endl;
-            return false;
+            int t = rand() % 9 + 1;
+            try
+            {
+                board.turn(t, player.getNotation());
+            }
+            catch (invalid_argument &err)
+            {
+                return false;
+            }
+            cout << player.getName() << " turn's: " << t << endl;
         }
-    }
-    else
-    {
-        int t = rand() % 9 + 1;
-        try
-        {
-            board.turn(t, player.getNotation());
-        }
-        catch (invalid_argument &err)
-        {
-            return false;
-        }
-        cout << player.getName() << " turn's: " << t << endl;
-    }
 
-    ++set;
-    return true;
+        ++set;
+        return true;
 }
 
 int Game::getCurrentResult() const
@@ -100,7 +100,7 @@ int Game::getCurrentResult() const
     if(set == 9)
         return 11; // End -> Equal
 
-    return -1; // Not end
+        return -1; // Not end
 }
 
 bool Game::isEnd() const
@@ -120,7 +120,7 @@ bool Game::isEqual() const
 const Player &Game::getWinner() const
 {
     if(!isEnd())
-        throw invalid_argument("Play until the game is over.");
+        throw runtime_error("Play until the game is over.");
 
     if(isEqual())
         throw invalid_argument("The result is equal.");
@@ -142,9 +142,6 @@ string Game::getResult(unsigned int playerNo) const
 
     if(!isEnd())
         throw invalid_argument("Play until the game is over.");
-
-    if(isEqual())
-        throw invalid_argument("We don't want equal results.");
 
     string boardRes = board.toString();
     string res = "";
@@ -177,14 +174,20 @@ string Game::getResult(unsigned int playerNo) const
         res += " ";
     }
 
-    Player winnerPlayer = getWinner();
-    if(winnerPlayer.getId() == ourPlayer.getId())
+    if(isEqual())
     {
-        res += "1";
+        res += "0.5 ";
         return res;
     }
 
-    res += "0";
+    Player winnerPlayer = getWinner();
+    if(winnerPlayer.getId() == ourPlayer.getId())
+    {
+        res += "1 ";
+        return res;
+    }
+
+    res += "0 ";
     return res;
 }
 
@@ -257,15 +260,24 @@ void Game::autoPlay(unsigned int num)
 
         try
         {
-            cout << game.getWinner().getName() << " is win!" << endl;
+            try
+            {
+                cout << game.getWinner().getName() << " is win!" << endl;
+            }
+            catch (invalid_argument &err)
+            {
+                cout << "The result is equal!" << endl;
+            }
+
             TrainingData &dataStream = TrainingData::getInstance();
             dataStream.open();
+            cout << game.getResult(1);
             dataStream << game.getResult(1);
             dataStream.close();
         }
         catch (exception &err)
         {
-            cout << err.what();
+            cout << "Error occurred: " << err.what();
         }
         sleep(1);
     }
