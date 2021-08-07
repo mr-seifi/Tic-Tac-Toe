@@ -17,8 +17,9 @@ public:
     bool playerTurn(); // ++PlayerScore
     const Board &getBoard();
     std::string getResult(unsigned int) const;
+    std::vector<std::vector<double>> generatePData();
     static void play();
-    static void autoPlay(unsigned int);
+    static void autoPlay(unsigned int); // Change name of this to trainData
 
 private:
     unsigned int set;
