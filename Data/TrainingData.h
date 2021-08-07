@@ -3,12 +3,15 @@
 
 #include <iostream>
 #include <fstream>
+#include <vector>
+
 class TrainingData {
 public:
     static TrainingData &getInstance();
-    void open();
+    void open(std::string);
     void close();
     TrainingData &operator<<(const std::string&);
+    TrainingData &operator<<(std::vector<std::vector<double>>);
 
 private:
     TrainingData() {}
