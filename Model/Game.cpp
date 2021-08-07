@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#include <vector>
 
 using namespace std;
 
@@ -189,6 +190,57 @@ string Game::getResult(unsigned int playerNo) const
 
     res += "0 ";
     return res;
+}
+
+vector<vector<double>> Game::generatePData()
+{
+    if(isEnd())
+        throw invalid_argument("The game was ended. Try again!");
+
+
+    string boardRes = board.toString();
+    string res = "";
+    Player ourPlayer;
+    Player theirPlayer;
+
+    if(players.first.getIsAI())
+    {
+        ourPlayer = players.first;
+        theirPlayer = players.second;
+    }
+    else if(players.second.getIsAI())
+    {
+        ourPlayer = players.second;
+        theirPlayer = players.first;
+    }
+    else
+        throw invalid_argument("Who is AI?");
+
+    vector<double> currentSituation;
+    for(int i = 0; i < 11; ++i)
+    {
+        if(i == 3 || i == 7)
+            continue;
+
+        if(boardRes[i] == '-')
+            currentSituation.push_back(0);
+        else if(boardRes[i] == ourPlayer.getNotation())
+            currentSituation.push_back(1);
+        else if(boardRes[i] == theirPlayer.getNotation())
+            currentSituation.push_back(-1);
+    }
+    vector<vector<double>> allMovements;
+    for(int i = 0; i < 9; ++i)
+    {
+        if(currentSituation[i] != 0)
+            continue;
+
+        currentSituation[i] = 1;
+        allMovements.push_back(currentSituation);
+        currentSituation[i] = 0;
+    }
+
+    return allMovements;
 }
 
 void Game::play()
