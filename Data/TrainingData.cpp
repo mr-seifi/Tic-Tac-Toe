@@ -8,11 +8,11 @@ TrainingData &TrainingData::getInstance()
     return instance;
 }
 
-void TrainingData::open()
+void TrainingData::open(string s)
 {
     try
     {
-        outputStream.open("data.mat", ios_base::app);
+        outputStream.open(s, ios_base::app);
     }
     catch (exception &err)
     {
@@ -44,5 +44,19 @@ TrainingData &TrainingData::operator<<(const string &s)
         return (*this);
     }
 
+    throw runtime_error("Your file stream isn't open.");
+}
+
+TrainingData &TrainingData::operator<<(std::vector<std::vector<double>> allMovements)
+{
+    if(outputStream.is_open())
+    {
+        for(int i = 0; i < allMovements.size(); ++i)
+        {
+            for(int j = 0; j < 9; ++j)
+                outputStream << allMovements[i][j] << ' ';
+            outputStream << endl;
+        }
+    }
     throw runtime_error("Your file stream isn't open.");
 }
