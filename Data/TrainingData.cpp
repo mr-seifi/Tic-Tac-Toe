@@ -2,29 +2,37 @@
 
 using namespace std;
 
+// Singleton design pattern.
 TrainingData &TrainingData::getInstance()
 {
     static TrainingData instance;
     return instance;
 }
 
-void TrainingData::open(string s)
+// Write mode or Append mode?
+void TrainingData::open(string path, bool app)
 {
     try
     {
-        outputStream.open(s, ios_base::app);
+        if(app)
+            outputStream.open(path, ios_base::app);
+        else
+            outputStream.open(path, ios_base::out);
+
     }
-    catch (exception &err)
-    {
+    catch (exception &err) // Handle opening file error.
+        {
         cout << "Error occurred in file opening: " << err.what();
-    }
+        }
 }
 
+// Close file (it's required to apply changes).
 void TrainingData::close()
 {
     outputStream.close();
 }
 
+// Overload << operator for one result (string type) and write it into the file by whitespace delimiter
 TrainingData &TrainingData::operator<<(const string &s)
 {
     if(outputStream.is_open())
@@ -40,13 +48,14 @@ TrainingData &TrainingData::operator<<(const string &s)
             gameRes.erase(0, pos + delimiter.length());
         }
         outputStream << endl;
-
-        return (*this);
     }
+    else
+        throw runtime_error("Your file stream isn't open.");
 
-    throw runtime_error("Your file stream isn't open.");
+    return (*this);
 }
 
+// Overload << operator for some result (vector type) and write it into the file
 TrainingData &TrainingData::operator<<(std::vector<std::vector<double>> allMovements)
 {
     if(outputStream.is_open())
@@ -58,5 +67,8 @@ TrainingData &TrainingData::operator<<(std::vector<std::vector<double>> allMovem
             outputStream << endl;
         }
     }
-    throw runtime_error("Your file stream isn't open.");
+    else
+        throw runtime_error("Your file stream isn't open.");
+
+    return (*this);
 }

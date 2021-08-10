@@ -4,11 +4,15 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <cstdio>
+#include <memory>
+#include <string>
+#include <array>
 
 class TrainingData {
 public:
     static TrainingData &getInstance();
-    void open(std::string);
+    void open(std::string, bool);
     void close();
     TrainingData &operator<<(const std::string&);
     TrainingData &operator<<(std::vector<std::vector<double>>);
