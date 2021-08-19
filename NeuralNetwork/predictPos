@@ -1,5 +1,6 @@
 #! octave-interpreter-name -qf
 # predict Tic-Tac-Toe
+addpath('../NeuralNetwork')
 load Theta1.mat;
 load Theta2.mat;
 load Theta3.mat;
