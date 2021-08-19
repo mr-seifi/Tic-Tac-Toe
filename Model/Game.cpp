@@ -79,6 +79,7 @@ bool Game::computerTurn(bool isAI)
         TrainingData &trainingData = TrainingData::getInstance();
         trainingData.open("pData.mat", false);
         trainingData << this->getAllPossibleNextMoves();
+        trainingData.close();
         OperationSystem &operationSystem = OperationSystem::getInstance();
         int pre = stoi(operationSystem.exec("octave ../NeuralNetwork/predictPos"));
         int currentPosition = 1;
