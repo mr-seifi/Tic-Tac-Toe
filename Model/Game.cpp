@@ -92,10 +92,14 @@ bool Game::computerTurn(bool isAI)
     if(isAI)
     {
         TrainingData &trainingData = TrainingData::getInstance();
+        trainingData.open("pData.mat", false);
         trainingData << this->getAllPossibleNextMoves();
         OperationSystem &operationSystem = OperationSystem::getInstance();
         int pre = stoi(operationSystem.exec("octave ../NeuralNetwork/predictPos"));
-        cout << pre << endl;
+        while(pre > 0)
+        {
+
+        }
     }
     else // Random choice
     {
