@@ -48,35 +48,20 @@ bool Game::playerTurn()
     if(isEnd())
         throw invalid_argument("The game is over."); // operator<< for save results ... File << Game
 
-        if(!player.getIsAI()) // isBot
+        int t;
+        cout << player.getName() << " turn's: ";
+        cin >> t;
+        try
         {
-            int t;
-            cout << player.getName() << " turn's: ";
-            cin >> t;
-            try
-            {
-                board.turn(t, player.getNotation());
-            }
-            catch (invalid_argument &err)
-            {
-                cout << "You can't do this because position " << t << " isn't empty."
-                << " Try again!" << endl;
-                return false;
-            }
+            board.turn(t, player.getNotation());
         }
-        else
+        catch (invalid_argument &err)
         {
-            int t = rand() % 9 + 1;
-            try
-            {
-                board.turn(t, player.getNotation());
-            }
-            catch (invalid_argument &err)
-            {
-                return false;
-            }
-            cout << player.getName() << " turn's: " << t << endl;
+            cout << "You can't do this because position " << t << " isn't empty."
+            << " Try again!" << endl;
+            return false;
         }
+
 
         ++set;
         return true;

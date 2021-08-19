@@ -6,6 +6,6 @@ using namespace std;
 
 int main() {
     // overload comparison operators for player obj (score)
-
+    Game::play();
     return 0;
 }
