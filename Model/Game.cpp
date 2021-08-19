@@ -82,13 +82,16 @@ bool Game::computerTurn(bool isAI)
         trainingData.close();
         OperationSystem &operationSystem = OperationSystem::getInstance();
         int pre = stoi(operationSystem.exec("octave ../NeuralNetwork/predictPos"));
-        int currentPosition = 1;
+        int currentPosition = 0;
         for(int i = 1; i <= 9; ++i)
         {
             if(!getBoard().isFill(i))
                 ++currentPosition;
             if(currentPosition == pre)
+            {
+                currentPosition = i;
                 break;
+            }
         }
         try
         {
