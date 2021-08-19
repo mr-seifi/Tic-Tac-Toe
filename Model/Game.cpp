@@ -96,10 +96,23 @@ bool Game::computerTurn(bool isAI)
         trainingData << this->getAllPossibleNextMoves();
         OperationSystem &operationSystem = OperationSystem::getInstance();
         int pre = stoi(operationSystem.exec("octave ../NeuralNetwork/predictPos"));
-        while(pre > 0)
+        int currentPosition = 1;
+        for(int i = 1; i <= 9; ++i)
         {
-
+            if(!getBoard().isFill(i))
+                ++currentPosition;
+            if(currentPosition == pre)
+                break;
         }
+        try
+        {
+            board.turn(currentPosition, player.getNotation());
+        }
+        catch (invalid_argument &err)
+        {
+            return false;
+        }
+        cout << player.getName() << " turn's: " << currentPosition << endl;
     }
     else // Random choice
     {
