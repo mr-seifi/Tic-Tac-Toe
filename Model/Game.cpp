@@ -292,16 +292,16 @@ void Game::play()
     {
         try
         {
-            if(!p1.getIsAI())
+            Player currentPlayer = game.whoTurn();
+            if(!currentPlayer.getIsAI())
             {
                 if(game.playerTurn())
                     cout << game.getBoard() << endl;
             }
             else
-            {
                 if(game.computerTurn(true))
                     cout << game.getBoard() << endl;
-            }
+
 
         }
         catch (exception &err)
