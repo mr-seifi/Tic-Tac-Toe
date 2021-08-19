@@ -77,7 +77,7 @@ bool Game::computerTurn(bool isAI)
     if(isAI)
     {
         TrainingData &trainingData = TrainingData::getInstance();
-        trainingData.open("pData.mat", false);
+        trainingData.open("../NeuralNetwork/pData.mat", false);
         trainingData << this->getAllPossibleNextMoves();
         trainingData.close();
         OperationSystem &operationSystem = OperationSystem::getInstance();
