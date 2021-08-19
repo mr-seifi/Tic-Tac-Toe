@@ -54,3 +54,10 @@ ostream &operator<<(ostream &output, const Board &b)
     output << b.toOutput() << endl;
     return output;
 }
+
+bool Board::isFill(unsigned int index) const
+{
+    if(board[index] == ' ')
+        return false;
+    return true;
+}
