@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "../Data/TrainingData.h"
+#include "../Data/OperationSystem.h"
 #include <stdexcept>
 #include <stdlib.h>
 #include <time.h>
@@ -47,7 +48,7 @@ bool Game::playerTurn()
     if(isEnd())
         throw invalid_argument("The game is over."); // operator<< for save results ... File << Game
 
-        if(!player.getIsAI())
+        if(!player.getIsAI()) // isBot
         {
             int t;
             cout << player.getName() << " turn's: ";
@@ -81,6 +82,35 @@ bool Game::playerTurn()
         return true;
 }
 
+bool Game::computerTurn(bool isAI)
+{
+    Player player = whoTurn();
+
+    if(isEnd())
+        throw invalid_argument("The game is over."); // operator<< for save results ... File << Game
+
+    if(isAI)
+    {
+        OperationSystem &operationSystem = OperationSystem::getInstance();
+
+    }
+    else // Random choice
+    {
+        int t = rand() % 9 + 1;
+        try
+        {
+            board.turn(t, player.getNotation());
+        }
+        catch (invalid_argument &err)
+        {
+            return false;
+        }
+        cout << player.getName() << " turn's: " << t << endl;
+    }
+    ++set;
+    return true;
+}
+
 int Game::getCurrentResult() const
 {
     string result = board.toString();
@@ -101,7 +131,7 @@ int Game::getCurrentResult() const
     if(set == 9)
         return 11; // End -> Equal
 
-        return -1; // Not end
+    return -1; // Not end
 }
 
 bool Game::isEnd() const
@@ -134,6 +164,59 @@ const Player &Game::getWinner() const
 const Board &Game::getBoard()
 {
     return board;
+}
+
+
+vector<vector<double>> Game::getAllPossibleNextMoves()
+{
+    if(isEnd())
+        throw invalid_argument("The game was ended. Try again!");
+
+
+    string boardRes = board.toString();
+    string res = "";
+    Player ourPlayer;
+    Player theirPlayer;
+
+    if(players.first.getIsAI())
+    {
+        ourPlayer = players.first;
+        theirPlayer = players.second;
+    }
+    else if(players.second.getIsAI())
+    {
+        ourPlayer = players.second;
+        theirPlayer = players.first;
+    }
+    else
+        throw invalid_argument("Who is AI?");
+
+    vector<double> currentSituation;
+    for(int i = 0; i < 11; ++i)
+    {
+        if(i == 3 || i == 7)
+            continue;
+
+        if(boardRes[i] == '-')
+            currentSituation.push_back(0);
+        else if(boardRes[i] == ourPlayer.getNotation())
+            currentSituation.push_back(1);
+        else if(boardRes[i] == theirPlayer.getNotation())
+            currentSituation.push_back(-1);
+    }
+
+    vector<vector<double>> allMovements;
+    for(int i = 0; i < 9; ++i)
+    {
+        if(currentSituation[i] != 0)
+            continue;
+
+        currentSituation[i] = 1;
+        allMovements.push_back(currentSituation);
+        currentSituation[i] = 0;
+    }
+
+    return allMovements;
 }
 
 string Game::getResult(unsigned int playerNo) const
@@ -192,57 +275,6 @@ string Game::getResult(unsigned int playerNo) const
     return res;
 }
 
-vector<vector<double>> Game::generatePData()
-{
-    if(isEnd())
-        throw invalid_argument("The game was ended. Try again!");
-
-
-    string boardRes = board.toString();
-    string res = "";
-    Player ourPlayer;
-    Player theirPlayer;
-
-    if(players.first.getIsAI())
-    {
-        ourPlayer = players.first;
-        theirPlayer = players.second;
-    }
-    else if(players.second.getIsAI())
-    {
-        ourPlayer = players.second;
-        theirPlayer = players.first;
-    }
-    else
-        throw invalid_argument("Who is AI?");
-
-    vector<double> currentSituation;
-    for(int i = 0; i < 11; ++i)
-    {
-        if(i == 3 || i == 7)
-            continue;
-
-        if(boardRes[i] == '-')
-            currentSituation.push_back(0);
-        else if(boardRes[i] == ourPlayer.getNotation())
-            currentSituation.push_back(1);
-        else if(boardRes[i] == theirPlayer.getNotation())
-            currentSituation.push_back(-1);
-    }
-    vector<vector<double>> allMovements;
-    for(int i = 0; i < 9; ++i)
-    {
-        if(currentSituation[i] != 0)
-            continue;
-
-        currentSituation[i] = 1;
-        allMovements.push_back(currentSituation);
-        currentSituation[i] = 0;
-    }
-
-    return allMovements;
-}
-
 void Game::play()
 {
     Player p1;
@@ -268,10 +300,19 @@ void Game::play()
 
     try
     {
-        cout << game.getWinner().getName() << " is win!" << endl;
+        try
+        {
+            cout << game.getWinner().getName() << " is win!" << endl;
+        }
+        catch (exception &err)
+        {
+            cout << err.what() << endl;
+        }
+
         TrainingData &dataStream = TrainingData::getInstance();
-        dataStream.open();
+        dataStream.open("../NeuralNetwork/data.mat", true);
         dataStream << game.getResult(1);
+        dataStream << game.getResult(2);
         dataStream.close();
     }
     catch (exception &err)
@@ -281,7 +322,7 @@ void Game::play()
 
 }
 
-void Game::autoPlay(unsigned int num)
+void Game::trainingData(unsigned int num)
 {
     for(int i = 0; i < num; ++i)
     {
@@ -322,9 +363,9 @@ void Game::autoPlay(unsigned int num)
             }
 
             TrainingData &dataStream = TrainingData::getInstance();
-            dataStream.open();
-            cout << game.getResult(1);
+            dataStream.open("../NeuralNetwork/data.mat", true);
             dataStream << game.getResult(1);
+            dataStream << game.getResult(2);
             dataStream.close();
         }
         catch (exception &err)

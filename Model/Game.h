@@ -14,12 +14,13 @@ public:
     bool isEnd() const;
     bool isEqual() const;
     const Player &getWinner() const;
-    bool playerTurn(); // ++PlayerScore
     const Board &getBoard();
+    bool playerTurn(); // ++PlayerScore
+    bool computerTurn(bool isAI);
+    std::vector<std::vector<double>> getAllPossibleNextMoves(); // Only for AI works.
     std::string getResult(unsigned int) const;
-    std::vector<std::vector<double>> generatePData();
     static void play();
-    static void autoPlay(unsigned int); // Change name of this to trainData
+    static void trainingData(unsigned int);
 
 private:
     unsigned int set;
