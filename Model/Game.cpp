@@ -92,7 +92,7 @@ bool Game::computerTurn(bool isAI)
     if(isAI)
     {
         OperationSystem &operationSystem = OperationSystem::getInstance();
-
+        operationSystem.exec("octave ../NeuralNetwork/predictPos");
     }
     else // Random choice
     {
