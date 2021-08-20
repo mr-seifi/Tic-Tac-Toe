@@ -4,6 +4,6 @@ cd ../NeuralNetwork;
 load Theta1.mat;
 load Theta2.mat;
 load Theta3.mat;
-load pData.mat;
-[dummy, p] = max(predict(Theta1, Theta2, Theta3, pData), [], 1);
+load realtimeData.mat;
+[dummy, p] = max(predict(Theta1, Theta2, Theta3, realtimeData), [], 1);
 printf (num2str(p));
