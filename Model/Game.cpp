@@ -269,7 +269,7 @@ string Game::getResult(unsigned int playerNo) const
 
     if(isEqual())
     {
-        res += "0.5 ";
+        res += "1 ";
         return res;
     }
 
@@ -360,7 +360,7 @@ void Game::trainingData(unsigned int num)
         {
             try
             {
-                if(game.playerTurn())
+                if(game.computerTurn(false))
                     cout << game.getBoard() << endl;
             }
             catch (exception &err)
