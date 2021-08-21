@@ -11,7 +11,7 @@ initial_nn_params = [Theta1(:); Theta2(:); Theta3(:)];
 
 options = optimset('MaxIter', 400);
 
-lambda_list = 0:3e-3:0.2;
+lambda_list = 0:2e-2:2;
 J_training = zeros(length(lambda_list), 1);
 J_cross = zeros(length(lambda_list), 1);
 
@@ -37,7 +37,7 @@ title('Plot Cost value by Lambda');
 legend('Train', 'Cross Validation');
 xlabel('Lambda');
 ylabel('Error');
-print -dpng 'plotByLambda.png';
+print -dpng 'plotByLambda2.png';
 [cross_min cross_min_index] = min(J_cross);
 lambda = lambda_list(cross_min_index);
 costFunction = @(p) nnCostFunction(p, input_layer_size, first_hidden_layer_size, second_hidden_layer_size, num_labels, ...
