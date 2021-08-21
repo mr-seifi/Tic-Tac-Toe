@@ -77,7 +77,7 @@ bool Game::computerTurn(bool isAI)
     if(isAI)
     {
         TrainingData &trainingData = TrainingData::getInstance();
-        trainingData.open("../NeuralNetwork/pData.mat", false);
+        trainingData.open("../NeuralNetwork/realtimeData.mat", false);
         trainingData << this->getAllPossibleNextMoves();
         trainingData.close();
         OperationSystem &operationSystem = OperationSystem::getInstance();
@@ -327,11 +327,11 @@ void Game::play()
             cout << err.what() << endl;
         }
 
-        TrainingData &dataStream = TrainingData::getInstance();
+        /* TrainingData &dataStream = TrainingData::getInstance();
         dataStream.open("../NeuralNetwork/data.mat", true);
         dataStream << game.getResult(1);
         dataStream << game.getResult(2);
-        dataStream.close();
+        dataStream.close(); */
     }
     catch (exception &err)
     {
