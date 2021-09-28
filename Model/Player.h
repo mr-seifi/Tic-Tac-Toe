@@ -3,25 +3,22 @@
 
 #include <iostream>
 class Player {
-    friend std::istream &operator>>(std::istream&, Player&);
+    friend std::istream &operator>>(std::istream&, Player&); // Overload >> operator to get player information easier
 public:
-    Player();
-    explicit Player(std::string, bool = false);
-    Player(std::string, char, bool = false);
-    unsigned int getId() const;
-    void setName(std::string);
-    std::string getName() const;
-    void scoreIncrement();
-    unsigned int getScore() const;
-    void setIsAI(bool);
-    bool getIsAI() const;
-    void setNotation(char);
-    char getNotation() const;
+    Player(); // Player constructor
+    explicit Player(std::string, bool = false); // Overload Player constructor
+    Player(std::string, char, bool = false); // Overload Player constructor
+    unsigned int getId() const; // return player id
+    void setName(std::string); // set player id
+    std::string getName() const; // return player name
+    void setIsAI(bool); // set player is bot or not (T/F)
+    bool getIsAI() const; // return player is bot or not (T/F)
+    void setNotation(char); // set player notation
+    char getNotation() const; // return player notation
 
 private:
     unsigned int id;
     std::string name;
-    unsigned int score;
     bool isAI;
     char notation;
     static unsigned int lastId;

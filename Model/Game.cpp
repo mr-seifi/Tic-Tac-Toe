@@ -320,7 +320,7 @@ void Game::play()
     {
         try
         {
-            cout << game.getWinner().getName() << " is win!" << endl;
+            cout << game.getWinner().getName() << " wins!" << endl;
         }
         catch (exception &err)
         {
@@ -373,7 +373,7 @@ void Game::trainingData(unsigned int num)
         {
             try
             {
-                cout << game.getWinner().getName() << " is win!" << endl;
+                cout << game.getWinner().getName() << " wins!" << endl;
             }
             catch (invalid_argument &err)
             {
@@ -392,4 +392,71 @@ void Game::trainingData(unsigned int num)
         }
         sleep(1);
     }
+}
+
+void Game::randomVsAI(unsigned int num)
+{
+    Player p1;
+    p1.setName("Random");
+    p1.setIsAI(true); // Change to setIsComputer
+    p1.setNotation('X');
+    Player p2;
+    p2.setName("AI");
+    p2.setIsAI(true); // Change to setIsComputer
+    p2.setNotation('O');
+
+    while(num != 0)
+    {
+
+        Board b;
+
+        Game game(p1, p2, b);
+        while(!game.isEnd())
+        {
+            try
+            {
+                Player currentPlayer = game.whoTurn();
+                if(currentPlayer.getNotation() == 'X')
+                {
+                    if(game.computerTurn(false))
+                        cout << game.getBoard() << endl;
+                }
+                else
+                    if(game.computerTurn(true))
+                        cout << game.getBoard() << endl;
+
+
+            }
+            catch (exception &err)
+            {
+                cout << err.what() << endl;
+            }
+        }
+
+        try
+        {
+            ofstream outputStream("d.mat", ios::app);
+            try
+            {
+                cout << game.getWinner().getName() << " wins!" << endl;
+                if(game.getWinner().getName() == "Random")
+                    outputStream << game.getWinner().getName() << " " << game.getResult(2) << endl;
+                else
+                    outputStream << game.getWinner().getName() << endl;
+            }
+            catch (exception &err)
+            {
+                cout << err.what() << endl;
+            }
+
+            outputStream << "draw\n";
+            outputStream.close();
+        }
+        catch (exception &err)
+        {
+            cout << err.what();
+        }
+        --num;
+    }
+
 }

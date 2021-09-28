@@ -1,15 +1,15 @@
 #ifndef TIC_TAC_TOE_OPERATIONSYSTEM_H
 #define TIC_TAC_TOE_OPERATIONSYSTEM_H
 
-class OperationSystem
+class OperationSystem // ** Singleton ** //
 {
 public:
-    static OperationSystem &getInstance()
+    static OperationSystem &getInstance() // get instance of operating system class
     {
         static OperationSystem instance;
         return instance;
     }
-    std::string getOsName()
+    std::string getOsName() // return your os type
     {
         #ifdef _WIN32
             return "Windows 32-bit";
@@ -27,7 +27,7 @@ public:
             return "Other";
         #endif
     }
-    std::string linuxExecute(const char* cmd)
+    std::string linuxExecute(const char* cmd) // execute linux commands
     {
         std::array<char, 128> buffer;
         std::string result;
@@ -40,7 +40,7 @@ public:
         }
         return result;
     }
-    std::string exec(const char* cmd)
+    std::string exec(const char* cmd) // execute command by recognizing your operating system type (only support Linux for temporary period)
     {
         if(getOsName() == "Linux")
             return linuxExecute(cmd);

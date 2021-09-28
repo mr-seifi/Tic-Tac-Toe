@@ -7,20 +7,21 @@
 
 class Game {
 public:
-    Game();
-    Game(const Player&, const Player&, const Board&);
-    const Player &whoTurn() const;
-    int getCurrentResult() const;
-    bool isEnd() const;
-    bool isEqual() const;
-    const Player &getWinner() const;
-    const Board &getBoard();
-    bool playerTurn(); // ++PlayerScore
-    bool computerTurn(bool isAI);
-    std::vector<std::vector<double>> getAllPossibleNextMoves(); // Only for AI works.
-    std::string getResult(unsigned int) const;
-    static void play();
-    static void trainingData(unsigned int);
+    Game(); // Game constructor
+    Game(const Player&, const Player&, const Board&); // Overload Game constructor
+    const Player &whoTurn() const; // return player who should turn now
+    int getCurrentResult() const; // check the game is over or not and who wins
+    bool isEnd() const; // return a bool that indicates the game is over or not
+    bool isEqual() const; // return a bool that indicates the game is equal or not
+    const Player &getWinner() const; // return winner player at the end of the game
+    const Board &getBoard(); // return current board in the middle or end of play
+    bool playerTurn(); // wait for player who wants to turn
+    bool computerTurn(bool isAI); // wait (immediately) for computer who wants to turn
+    static void randomVsAI(unsigned int); // this method is for train data to feed neural network (random vs AI)
+    std::vector<std::vector<double>> getAllPossibleNextMoves(); // get all possible at next moves
+    std::string getResult(unsigned int) const; // return play result as string type
+    static void play(); // play method prepare environment to start the game
+    static void trainingData(unsigned int); // this method is for train data to feed neural network (random vs random)
 
 private:
     unsigned int set;

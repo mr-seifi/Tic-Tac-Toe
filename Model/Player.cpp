@@ -8,7 +8,6 @@ Player::Player()
 {
     id = ++lastId;
     setName("Player " + to_string(getId()));
-    score = 0;
     setIsAI(false);
 }
 
@@ -16,7 +15,6 @@ Player::Player(string name, bool isAI)
 {
     id = ++lastId;
     setName(name);
-    score = 0;
     setIsAI(isAI);
 }
 
@@ -25,7 +23,6 @@ Player::Player(string name, char notation, bool isAI)
     id = ++lastId;
     setName(name);
     setNotation(notation);
-    score = 0;
     setIsAI(isAI);
 }
 
@@ -42,16 +39,6 @@ void Player::setName(string n)
 string Player::getName() const
 {
     return name;
-}
-
-void Player::scoreIncrement()
-{
-    score += 100;
-}
-
-unsigned int Player::getScore() const
-{
-    return score;
 }
 
 void Player::setIsAI(bool ai)
