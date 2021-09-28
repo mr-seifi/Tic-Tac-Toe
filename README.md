@@ -24,3 +24,13 @@ This is implementation of [Tic Tac Toe](https://en.wikipedia.org/wiki/Tic-tac-to
 > This is main part of __AI__ core. by this directory, your computer can think and after that turn a move. 
 > Neural Network directory has several octave function files and one octave script which recall functions to predict next move.
 > ![Neural Network](Assets/nn.svg)
+
+### Some examples of playing
+#### Human wins
+![Human Wins](Assets/human_wins.gif)
+___
+#### AI wins
+![AI Wins](Assets/ai_wins.gif)
+___
+#### Same
+![Equal](Assets/equal.gif)
