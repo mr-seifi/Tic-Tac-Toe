@@ -12,12 +12,6 @@ My system tries to get all possible next moves and try to evaluate the probabili
 ![Alt text](../Assets/nn.svg)
 
 ### Function prototypes and some documentation
-* ##### debugInitializeWeights
-  * ```matlab
-    function W = debugInitializeWeights(fan_out, fan_in)
-    % This function take the number of input and output layer
-    % to return a random matrix of weights with randInitializeWeights()
-    ```
 * ##### fmincg
   * ```matlab
     function [X, fX, i] = fmincg(f, X, options, P1, P2, P3, P4, P5)
