@@ -50,3 +50,5 @@ ___
 ___
 #### Same
 ![Equal](Assets/equal.gif)
+
+Note: Neural network can't solve this problem as good as MiniMax solution.
