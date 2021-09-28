@@ -26,6 +26,7 @@ This is implementation of [Tic Tac Toe](https://en.wikipedia.org/wiki/Tic-tac-to
 > Below picture present my nn architecture which has __one input layer with 9 unit__, __a couple of hidden layers with 36 unit__ and __one output layer__ that generate __probability of me winning__.
 > ![Neural Network](Assets/nn.svg)
 
+[See more about my architecture](https://github.com/mr-seifi/Tic-Tac-Toe/tree/main/NeuralNetwork)
 ### Some examples of nn data
 ```matlab
  1 0 -1 -1 1 1 0 -1 1
