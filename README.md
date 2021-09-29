@@ -1,8 +1,8 @@
 # Tic-Tac-Toe
 ### Requirements
 1. __Linux__ operating system
-2. __Octave__ programming language
-   2. If you want play with AI, you should install octave on your system. for check:
+2. __Octave__ programming language <br/>
+   If you want play with AI, you should install octave on your system. for check:
    `octave --version`
 ### Description
 This is implementation of [Tic Tac Toe](https://en.wikipedia.org/wiki/Tic-tac-toe).
