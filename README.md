@@ -36,10 +36,10 @@ This is implementation of [Tic Tac Toe](https://en.wikipedia.org/wiki/Tic-tac-to
  -1 1 -1 1 -1 0 -1 1 1
  -1 -1 -1 0 1 1 0 0 1
  0 0 -1 -1 1 -1 1 1 -1
- % 1 represent it's my turn
- % 0 represent empty position
- % -1 represent it's your enemy turn
- % last column represent for 1 (i win), 0 (equal) and -1 (enemy wins)
+ % 1 represents it's my turn
+ % 0 represents empty position
+ % -1 represents it's your enemy turn
+ % last column represents for 1 (i win), 0 (equal) and -1 (enemy wins)
 ```
 ### Some examples of playing
 #### Human wins
