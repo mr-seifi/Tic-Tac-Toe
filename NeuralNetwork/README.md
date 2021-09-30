@@ -1,6 +1,6 @@
 # Neural Network
 ## Some generals
-As I mentioned before my nn architecture which has __one input layer with 9 unit__, __a couple of hidden layers with 36 unit__ and __one output layer__ that represent __probability of me wining__.
+As I mentioned before my nn architecture which has __one input layer with 9 units__, __a couple of hidden layers with 36 units__ and __one output layer__ that represent __the probability of me wining__.
 ### Layers
 #### 1. Input layer
 > This layer has 9 units which each unit represents one position of the Tic Tac Toe map. from position 1 to position 9.
@@ -25,11 +25,11 @@ My system tries to get all possible next moves and try to evaluate the probabili
     function [error_train, error_cross] = ...
     learningCurve(X, y, X_cross, y_cross, lambda)
     % By this function you can plot your costFunction 
-    % by changing number of training examples to achieve what is your
+    % by changing the number of training examples to achieve what is your
     % your model problem, high bias? high variance? Try it.
     ```
 * ##### main
-  * This is not a function, it just represents how to use these functions to train you nn.
+  * This is not a function, it just represents how to use these functions to train your nn.
 * ##### nnCostFunction
   * ```matlab
     function [J grad] = nnCostFunction(nn_params, ...
@@ -60,12 +60,12 @@ My system tries to get all possible next moves and try to evaluate the probabili
 * ##### randInitializeWeights
   * ```matlab
     function W = randInitializeWeights(L_in, L_out)
-    % By the name of this func you can guess specification of this.
-    % Giving number of input and output layer to generate one part of
-    % your weight matrix between 2 layer.
+    % By the name of this func you can guess the specification of this.
+    % Giving the number of input and output layers to generate one part of
+    % your weight matrix between 2 layers.
     ``` 
     ![equation](http://www.sciweavers.org/upload/Tex2Img_1632850556/render.png) <br/>
-    Where rho is random initialized weights.
+    Where rho is randomly initialized weights.
 * ##### sigmoid
   * ```matlab
     function g = sigmoid(z)
