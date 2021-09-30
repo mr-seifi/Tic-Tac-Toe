@@ -10,20 +10,20 @@ This is the implementation of [Tic Tac Toe](https://en.wikipedia.org/wiki/Tic-ta
 > Include some photos about NN architecture, .... <br/> 
 > _______
 > #### Data
-> Data directory include some headers and cpp files. <br/>
+> The data directory includes some headers and CPP files. <br/>
 > __Training Data__ is for train data to feed NN but how? by playing random versus random. <br/>
-> __OperatingSystem__ is for execute bash commands.
+> __OperatingSystem__ is for executing bash commands.
 > _______
 > #### Model
-> Model directory include __Board__, __Player__ and __Game__ classes. <br/>
-> __Board__ is for create board instance. by the name you can guess what each class do. <br/>
-> __Player__ is for create player instance. each player has __id__, __name__, __isAI__ and __notation__. <br/>
-> __Game__ is main part of Tic Tac Toe logic. each game has __set__ (calculate by number of turns), a pair of __players__ and __board__.
+> The model directory includes __Board__, __Player__ and __Game__ classes. <br/>
+> __Board__ is for creating board instance. by the name you can guess what each class does. <br/>
+> __Player__ is for creating a player instance. each player has __id__, __name__, __isAI__ and __notation__. <br/>
+> __Game__ is the main part of Tic Tac Toe logic. each game has a __set__ (calculate by the number of turns), a pair of __players__ and a __board__.
 > _______
 > #### Neural Network
 > This is the main part of __AI__ core. by this directory, your computer can think and after that turn a move. 
 > Neural Network directory has several octave function files and an octave script which recall functions to predict the next move. <br/>
-> Below picture presents my nn architecture which has __one input layer with 9 unit__, __a couple of hidden layers with 36 unit__ and __one output layer__ that generate __probability of me winning__.
+> The below picture presents my nn architecture which has __one input layer with 9 units__, __a couple of hidden layers with 36 units__ and __one output layer__ that generates __ the probability of me winning__.
 > ![Neural Network](Assets/nn.svg)
 
 [See more about my architecture](https://github.com/mr-seifi/Tic-Tac-Toe/tree/main/NeuralNetwork)
