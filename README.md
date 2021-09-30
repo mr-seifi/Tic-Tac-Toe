@@ -2,10 +2,10 @@
 ### Requirements
 1. __Linux__ operating system
 2. __Octave__ programming language <br/>
-   If you want play with AI, you should install octave on your system. for check:
+   If you want to play with AI, you should install octave on your system. for check:
    `octave --version`
 ### Description
-This is implementation of [Tic Tac Toe](https://en.wikipedia.org/wiki/Tic-tac-toe).
+This is the implementation of [Tic Tac Toe](https://en.wikipedia.org/wiki/Tic-tac-toe).
 > #### Assets
 > Include some photos about NN architecture, .... <br/> 
 > _______
@@ -21,9 +21,9 @@ This is implementation of [Tic Tac Toe](https://en.wikipedia.org/wiki/Tic-tac-to
 > __Game__ is main part of Tic Tac Toe logic. each game has __set__ (calculate by number of turns), a pair of __players__ and __board__.
 > _______
 > #### Neural Network
-> This is main part of __AI__ core. by this directory, your computer can think and after that turn a move. 
-> Neural Network directory has several octave function files and one octave script which recall functions to predict next move. <br/>
-> Below picture present my nn architecture which has __one input layer with 9 unit__, __a couple of hidden layers with 36 unit__ and __one output layer__ that generate __probability of me winning__.
+> This is the main part of __AI__ core. by this directory, your computer can think and after that turn a move. 
+> Neural Network directory has several octave function files and an octave script which recall functions to predict the next move. <br/>
+> Below picture presents my nn architecture which has __one input layer with 9 unit__, __a couple of hidden layers with 36 unit__ and __one output layer__ that generate __probability of me winning__.
 > ![Neural Network](Assets/nn.svg)
 
 [See more about my architecture](https://github.com/mr-seifi/Tic-Tac-Toe/tree/main/NeuralNetwork)
@@ -51,4 +51,4 @@ ___
 #### Same
 ![Equal](Assets/equal.gif)
 
-Note: Neural network can't solve this problem as good as MiniMax solution.
+Note: Neural network can't solve this problem as well as MiniMax solution.
