@@ -23,7 +23,7 @@ This is the implementation of [Tic Tac Toe](https://en.wikipedia.org/wiki/Tic-ta
 > #### Neural Network
 > This is the main part of __AI__ core. by this directory, your computer can think and after that turn a move. 
 > Neural Network directory has several octave function files and an octave script which recall functions to predict the next move. <br/>
-> The below picture presents my nn architecture which has __one input layer with 9 units__, __a couple of hidden layers with 36 units__ and __one output layer__ that generates __ the probability of me winning__.
+> The below picture presents my nn architecture which has __one input layer with 9 units__, __a couple of hidden layers with 36 units__ and __one output layer__ that generates __the probability of me winning__.
 > ![Neural Network](Assets/nn.svg)
 
 [See more about my architecture](https://github.com/mr-seifi/Tic-Tac-Toe/tree/main/NeuralNetwork)
