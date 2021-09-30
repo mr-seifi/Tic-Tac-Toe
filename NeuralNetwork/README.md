@@ -3,11 +3,11 @@
 As I mentioned before my nn architecture which has __one input layer with 9 unit__, __a couple of hidden layers with 36 unit__ and __one output layer__ that represent __probability of me wining__.
 ### Layers
 #### 1. Input layer
-> This layer has 9 units which each unit represent one position of Tic Tac Toe map. from position 1 to position 9.
+> This layer has 9 units which each unit represents one position of the Tic Tac Toe map. from position 1 to position 9.
 #### 2. Output layer
-> This layer has 1 unit that generate probability of me winning.
+> This layer has 1 unit that generates the probability of me winning.
 
-My system tries to get all possible next moves and try to evaluate the probability for each move and choose maximum probability corresponding next move.
+My system tries to get all possible next moves and try to evaluate the probability for each move and choose the maximum probability corresponding next move.
 
 ![Alt text](../Assets/nn.svg)
 
@@ -87,6 +87,6 @@ My system tries to get all possible next moves and try to evaluate the probabili
                      second_hidden_layer_size, ...
                      num_labels, ..., 
                      X, y, lambda)
-    % This function minimize your costFunction by gradient decsent algorithm
+    % This function minimizes your costFunction by gradient descent algorithm
     % or fmincg which work with more efficiency
     ``` 
